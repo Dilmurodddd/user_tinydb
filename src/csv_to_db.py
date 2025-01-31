@@ -10,17 +10,6 @@ def read_csv(file_path):
         records = [dict(zip(headers, row.split(","))) for row in data[1:]]
     return records
     
-# def read_csv(file_path):
-    # try:
-        # with open(file_path, "r") as f:
-            # data = f.read().strip().split("\n")
-            # headers = data[0].split(",")
-            # records = [dict(zip(headers, row.split(","))) for row in data[1:]]
-        # return records
-    # except FileNotFoundError:
-        # raise ValueError(f"File not found: {file_path}")
-
-
 
 def insert_into_db(data, db_path):
     # Insert data into TinyDB
