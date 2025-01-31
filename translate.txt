@@ -1,0 +1,110 @@
+Bu loyiha CSV fayldagi foydalanuvchi ma'lumotlarini TinyDB ma'lumotlar bazasiga o'tkazish skriptini yozishni talab qiladi. TinyDB – yengil NoSQL bazasi bo‘lib, JSON formatda ma'lumotlarni saqlaydi.   
+
+---
+
+### **Loyiha maqsadi**  
+✅ CSV fayldan foydalanuvchilar haqidagi ma’lumotlarni o‘qish  
+✅ Ushbu ma'lumotlarni TinyDB bazasiga joylash  
+✅ Ma’lumotlarning to‘g‘riligini tekshirish va migratsiya jarayonida xatoliklarni oldini olish  
+
+**Haqiqiy hayotdagi qo‘llanilishi:**  
+Ko‘pgina tashkilotlar ma’lumotlarni CSV kabi oddiy fayllardan ma'lumotlar bazasiga o‘tkazishga ehtiyoj sezishadi. Bu loyiha aynan shu jarayonni yengil vositalar yordamida o‘rganish uchun mo‘ljallangan.  
+
+---
+
+### **O‘rnatish (Installation)**  
+1. **Loyiha kodini yuklab oling**  
+2. **Kerakli kutubxonalarni o‘rnating:**  
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+### **Foydalanish (Usage)**  
+
+#### **1. CSV fayldan ma’lumotlarni TinyDB bazasiga o‘tkazish**  
+```python
+from csv_to_db import read_csv, insert_into_db
+
+# CSV fayldagi ma'lumotlarni o‘qish
+data = read_csv('user_data.csv')
+
+# TinyDB bazasiga ma'lumotlarni kiritish
+insert_into_db(data, 'users.json')
+```
+
+#### **2. TinyDB bazasidan ma'lumotlarni olish (so‘rov qilish)**  
+```python
+from csv_to_db import query_db
+
+# Barcha foydalanuvchilarni olish
+all_users = query_db('users.json')
+
+# Faqat erkak foydalanuvchilarni olish
+male_users = query_db('users.json', 'gender', 'Male')
+```
+
+#### **3. Buyruq qatori orqali ishlatish (CLI - Command Line Interface)**  
+```bash
+python csv_to_db.py user_data.csv --db custom_db.json
+```
+
+---
+
+### **CSV Fayl Formati**  
+`user_data.csv` fayli quyidagi ko‘rinishda bo‘ladi:  
+```csv
+id,first_name,last_name,email,gender,job
+1,John,Doe,john@example.com,Male,Engineer
+2,Jane,Smith,jane@example.com,Female,Designer
+```
+
+---
+
+### **Testlarni Ishga Tushirish**  
+Skript to‘g‘ri ishlayotganini tekshirish uchun quyidagi buyruqni bering:  
+```bash
+pytest test/test_csv_to_db.py -v
+```
+📌 Asosiy testlar:  
+- Fayl topilmaganida qanday ishlashi  
+- Bo‘sh CSV faylga moslashuvi  
+- Ma'lumotlar bazaga to‘g‘ri yozilganini tekshirish  
+- Foydalanuvchilarni to‘g‘ri filtrlayotganini tekshirish  
+
+---
+
+### **Qo‘shimcha Foydali Buyruqlar**  
+
+1️⃣ **Buyruq qatori orqali TinyDB bazasidan ma’lumotlarni olish**  
+```bash
+python -c "from csv_to_db import query_db; print(query_db('users.json', 'job', 'Engineer'))"
+```
+👆 Bu buyruq `users.json` bazasidan "Engineer" (muhandis) bo‘lgan foydalanuvchilarni chiqaradi.  
+
+2️⃣ **Yangi TinyDB bazasi yaratish va unga ma’lumot kiritish**  
+```python
+from csv_to_db import insert_into_db
+insert_into_db([{'id': '100', 'name': 'Test User'}], 'new_db.json')
+```
+👆 Bu kod yangi `new_db.json` bazasini yaratib, unga test foydalanuvchisini qo‘shadi.  
+
+---
+
+### **Muhim eslatmalar**  
+✅ TinyDB bazasi **JSON formatda** saqlanadi  
+✅ Barcha maydonlar **matn (string)** sifatida saqlanadi  
+✅ So‘rovlar (query) **katta-kichik harflarga sezgir (case-sensitive)**  
+✅ CSV faylining ustun nomlari **bir xil bo‘lishi** shart  
+
+---
+
+✅ Bu loyiha quyidagilarni o‘z ichiga oladi:  
+1. **O‘rnatish bo‘yicha ko‘rsatmalar**  
+2. **Python API orqali ishlatish misollari**  
+3. **Testlarni ishga tushirish bo‘yicha ko‘rsatmalar**  
+4. **Buyruq qatori (CLI) orqali foydalanish**  
+5. **Fayllar va muhit bo‘yicha talablar**  
+
+Agar tushunarsiz joylari bo‘lsa, bemalol so‘rashingiz mumkin! 🚀
