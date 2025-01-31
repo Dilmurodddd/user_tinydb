@@ -2,23 +2,23 @@ import csv
 from tinydb import TinyDB, Query
 
 
-# def read_csv(file_path):
-    # # Read and parse the CSV file
-    # with open(file_path, "r") as f:
-        # data = f.read().strip().split("\n")
-        # headers = data[0].split(",")
-        # records = [dict(zip(headers, row.split(","))) for row in data[1:]]
-    # return records
-    # 
 def read_csv(file_path):
-    try:
-        with open(file_path, "r") as f:
-            data = f.read().strip().split("\n")
-            headers = data[0].split(",")
-            records = [dict(zip(headers, row.split(","))) for row in data[1:]]
-        return records
-    except FileNotFoundError:
-        raise ValueError(f"File not found: {file_path}")
+    # Read and parse the CSV file
+    with open(file_path, "r") as f:
+        data = f.read().strip().split("\n")
+        headers = data[0].split(",")
+        records = [dict(zip(headers, row.split(","))) for row in data[1:]]
+    return records
+    
+# def read_csv(file_path):
+    # try:
+        # with open(file_path, "r") as f:
+            # data = f.read().strip().split("\n")
+            # headers = data[0].split(",")
+            # records = [dict(zip(headers, row.split(","))) for row in data[1:]]
+        # return records
+    # except FileNotFoundError:
+        # raise ValueError(f"File not found: {file_path}")
 
 
 
