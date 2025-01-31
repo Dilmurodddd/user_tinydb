@@ -3,6 +3,7 @@ from src.csv_to_db import read_csv, insert_into_db, query_db
 import os
 from tinydb import TinyDB
 
+
 @pytest.fixture
 def sample_csv(tmp_path):
     csv_path = tmp_path / "test.csv"
