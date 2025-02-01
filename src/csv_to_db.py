@@ -19,14 +19,17 @@ def insert_into_db(data, db_path):
     return insertmultiple
 
 
-def query_db(db_path, query_field, query_value):
+def query_db(db_path, query_field = None, query_value = None):
     # Query the database
-
-    db = TinyDB(db_path)
-    table =db.table('students')
-    User = Query()
-    searchdata = table.search(User[query_field] == query_value)
-    return searchdata
+    if query_field == None or query_value == None:
+        db = TinyDB(db_path)
+        return db.all()
+    else:
+        db = TinyDB(db_path)
+        table =db.table('students')
+        User = Query()
+        searchdata = table.search(User[query_field] == query_value)
+        return searchdata
 
 if __name__ == "__main__":
     # Main execution logic
